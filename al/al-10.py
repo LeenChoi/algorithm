@@ -70,6 +70,10 @@ p = "mis*is*p*."
                         p[j] == '*': / dp[i-1][j] or dp[i][j-2] (s[i] == p[j-1] 或 p[j] == '.')
                                      \ dp[i][j-2]
 
+题解里有个人的评论说的很对：“其实你把这题理解为搜索题就行了。 动态规划就是记录了搜索结果避免重复搜索”
+我对这句话的理解是, p[j] 对 s[i] 搜索, 如果相等则记录 f[j][i] 为 true，然后 p[j+1] 对 p[j]记录为true的s[i]地方开始向后匹配,继续记录
+如果某个p[j]为'*' 那么从p[j-1]为true的s[i]位置开始向后持续匹配并记录, 直到s[i+x] != s[i] 为止(如果p[j-1]为'.' 那么将s后续整条都匹配)
+
 
 '''
 
@@ -91,7 +95,7 @@ class Solution(object):
         dp[0][0] = True
         for i in range(0, m + 1): # i == 0 为空串，空串有可能会被开头为 a* 的匹配串匹配到
             for j in range(1, n + 1):
-                if p[j - 1] != '*':
+                if p[j - 1] != '*': # 因为dp长度多一位，且按dp长度遍历的，所以这里取p字符要 -1
                     dp[i][j] = dp[i - 1][j - 1] if match(i - 1, j - 1) else False
                 else:
                     dp[i][j] = (dp[i][j - 2] or dp[i - 1][j]) if match(i - 1, j - 2) else dp[i][j - 2]
