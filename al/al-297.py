@@ -63,7 +63,6 @@ class Codec:
         return json.dumps(str)
         
         
-    # TODO: leetcode 的输入二叉树序列转树结构
     def deserialize(self, data):
         """Decodes your encoded data to tree.
         
