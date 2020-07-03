@@ -31,3 +31,23 @@ def deserialize(arr):
             nodeList[j] = right
             parent.right = right
     return root 
+
+def serialize(root):
+    seq, arr = [root], []
+    while len(seq) > 0:
+        node = seq.pop(0)
+        if node:
+            arr.append(node.val)
+            if node.left != None:
+                seq.append(node.left)
+            else:
+                seq.append(None)
+            if node.right != None:
+                seq.append(node.right)
+            else:
+                seq.append(None)
+        else:
+            arr.append(None)
+    while len(arr) > 0 and arr[-1] == None:
+        arr.pop()
+    return arr
