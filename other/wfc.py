@@ -159,6 +159,7 @@ class Wavefunction(object):
         """
         x, y = co_ords
         self.coefficients[x][y].remove(forbidden_tile)
+        return len(self.coefficients[x][y]) > 0
 
 
 class Model(object):
@@ -226,8 +227,14 @@ class Model(object):
                     # for it to ever get chosen. We therefore remove it from
                     # the other location's wavefunction.
                     if not other_tile_is_possible:
-                        self.wavefunction.constrain(other_coords, other_tile)
-                        stack.append(other_coords)
+                        ret = self.wavefunction.constrain(other_coords, other_tile)
+                        if not ret:
+                            print('contradiction!')
+                            assert(0)
+                        # stack.append(other_coords)
+                        # 我改的
+                        if not other_coords in stack:
+                            stack.append(other_coords)
 
     def min_entropy_co_ords(self):
         """Returns the co-ords of the location whose wavefunction has
@@ -337,10 +344,17 @@ input_matrix2 = [
     ['C','B','B','C'],
     ['A','C','C','A'],
 ]
+input_matrix3 = [
+    ['A','A','A','B','C'],
+    ['A','A','B','C','C'],
+    ['A','B','C','C','C'],
+    ['A','A','B','C','C'],
+    ['A','A','A','B','C'],
+]
 
-compatibilities, weights = parse_example_matrix(input_matrix)
+compatibilities, weights = parse_example_matrix(input_matrix3)
 compatibility_oracle = CompatibilityOracle(compatibilities)
-model = Model((20, 100), weights, compatibility_oracle)
+model = Model((10, 50), weights, compatibility_oracle)
 output = model.run()
 
 colors = {
