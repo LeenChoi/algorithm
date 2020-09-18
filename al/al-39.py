@@ -51,7 +51,7 @@ class Solution:
     def combinationSum(self, candidates, target: int):
         ans, group = [], []
         _sum = 0
-        def backstrap(index):
+        def backtrack(index):
             if index >= len(candidates):
                 return
             nonlocal _sum
@@ -62,11 +62,11 @@ class Solution:
                 return
             group.append(candidates[index])
             _sum += candidates[index]
-            backstrap(index)
+            backtrack(index)
             group.pop()
             _sum -= candidates[index]
-            backstrap(index + 1)
-        backstrap(0)
+            backtrack(index + 1)
+        backtrack(0)
         return ans
 
 

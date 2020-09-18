@@ -31,7 +31,7 @@ import copy
 class Solution:
     def combine(self, n: int, k: int):
         ans, group = [], []
-        def backstrap(num):
+        def backtrack(num):
             if len(group) == k:
                 tmp = copy.deepcopy(group)
                 ans.append(tmp)
@@ -39,11 +39,11 @@ class Solution:
             if num > n:
                 return
             group.append(num)
-            backstrap(num + 1)
+            backtrack(num + 1)
             group.pop()
-            backstrap(num + 1)
+            backtrack(num + 1)
         
-        backstrap(1)
+        backtrack(1)
         return ans
             
 

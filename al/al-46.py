@@ -32,16 +32,16 @@ import copy
 class Solution:
     def permute(self, nums):
         ans = []
-        def backstrap(cur):
+        def backtrack(cur):
             if cur == len(nums) - 1:
                 tmp = copy.deepcopy(nums)
                 ans.append(tmp)
                 return
             for i in range(cur, len(nums)):
                 nums[cur], nums[i] = nums[i], nums[cur]
-                backstrap(cur + 1)
+                backtrack(cur + 1)
                 nums[cur], nums[i] = nums[i], nums[cur]
-        backstrap(0)
+        backtrack(0)
         return ans
 
 

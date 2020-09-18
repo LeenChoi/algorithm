@@ -57,7 +57,7 @@ class Solution:
         ans, group = [], []
         n = len(candidates)
         _sum = 0
-        def backstrap(index):
+        def backtrack(index):
             nonlocal _sum
             if _sum >= target:
                 if _sum == target:
@@ -71,10 +71,10 @@ class Solution:
                     continue
                 group.append(candidates[i])
                 _sum += candidates[i]
-                backstrap(i + 1)
+                backtrack(i + 1)
                 group.pop()
                 _sum -= candidates[i]
-        backstrap(0)
+        backtrack(0)
         return ans
         
                 
