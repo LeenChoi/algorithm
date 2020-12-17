@@ -53,6 +53,7 @@ func uniqueOccurrences(arr []int) bool {
 	for _, v := range arr {
 		cnt[v]++
 	}
+	// struct{} 空类型
 	times := make(map[int]struct{})
 	for _, c := range cnt {
 		times[c] = struct{}{}
