@@ -38,7 +38,7 @@
 class Solution:
     def verifyPostorder(self, postorder) -> bool:
         def solve(i, j):
-            if i == j:
+            if i >= j:
                 return True
             p = i
             while postorder[p] < postorder[j]:
