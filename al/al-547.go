@@ -76,6 +76,7 @@ func findCircleNum(isConnected [][]int) int {
 			return
 		}
 		f1, f2 := find(node1), find(node2)
+		// 这里注意下，做个规则，更小的是最终父节点
 		if f1 < f2 {
 			fa[f2] = f1
 		} else if f2 < f1 {
