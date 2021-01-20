@@ -36,6 +36,7 @@ func main() {
 }
 
 func groupAnagrams(strs []string) [][]string {
+	// !!! map key 为数组
 	hm := map[[26]int][]string{}
 	for _, str := range strs {
 		key := [26]int{}
