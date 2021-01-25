@@ -130,7 +130,6 @@ func getKthMinNum(nums1, nums2 []int, k int) int {
 			k = k - step2
 		}
 	}
-	return 0
 }
 
 func min(x, y int) int {
