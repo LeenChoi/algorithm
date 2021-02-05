@@ -91,10 +91,8 @@ func superEggDrop(K int, N int) int {
 				l, h := 1, n
 				for l+1 < h { // 为啥是 l+1，因为必须求出来个 mid 是与 l,h 不重叠的，不然 mid == l 可能会死循环
 					mid := (l + h) / 2
-					fmt.Println(l, h, mid, k, n)
 					t1 := transfer(k-1, mid-1)
 					t2 := transfer(k, n-mid)
-					fmt.Println("tttttt", t1, t2)
 					if t1 < t2 {
 						l = mid
 					} else if t1 > t2 {
